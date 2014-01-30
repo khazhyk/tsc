@@ -5,9 +5,11 @@ function createTournament() {
     var rounds = document.getElementById("rounds");
     var number = parseInt(document.getElementById("tournamentNumber").value) || 64;
 
+    var std_dev = parseInt(document.getElementById("tournamentStdDev").value) || 100;
+
     var chance = document.getElementById("tournamentChance").checked;
 
-    currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance});
+    currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance, std_dev: std_dev});
     currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"));
 
     currentTable.sortBy("score", -1);

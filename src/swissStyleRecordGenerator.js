@@ -5,7 +5,7 @@ function SwissStyleRecordGenerator(numTeams, record, options) {
     this.chance = (options.chance === undefined) ? true : options.chance;
 
     var elo_mean = 1200;
-    var elo_std_dev = 100;
+    var elo_std_dev = (options.std_dev === undefined) ? 100 : options.std_dev;
 
 
     // Generate teams
