@@ -9,6 +9,7 @@ function createTournament() {
     currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance});
     currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"));
 
+    currentTable.sortBy("score", -1);
     currentTable.render();
     rounds.innerHTML = currentTournament.rounds;
 }
@@ -26,7 +27,6 @@ function runTourney() {
     var rounds = document.getElementById("rounds");
     if (currentTournament) {
         while(!currentTournament.is_done) currentTournament.runARound();
-        currentTable.sortBy("score", -1);
         currentTable.updateData(currentTournament.toDataArray());
         rounds.innerHTML = currentTournament.rounds;
     }
