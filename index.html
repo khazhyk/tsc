@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script src="./src/util.js"></script>
+    <script src="./src/match.js"></script>
+    <script src="./src/team.js"></script>
+    <script src="./src/simrecord.js"></script>
+    <script src="./src/swissStyleRecordGenerator.js"></script>
+    <script src="./lib/CSVToArray.js"></script>
+    <script src="./src/shittyTable.js"></script>
+    <script src="./src/main.js"></script>
+</head>
+<body>
+
+    <!--
+    <textarea id="teams">paste teams.csv here</textarea>
+    <textarea id="matches">paste matches.csv here</textarea>
+    <button id="importData" onclick="importData()">Import Data</button>
+    <button id="showScores" onclick="showScores()">Show Scores</button>
+    <button id="showMatches" onclick="showMatches()">Show Matches</button>
+    <button id="doEloCalculation" onclick="doEloCalculation()">Calculate Elo</button>
+    <div id="content"></div>
+-->
+    <input type="number" id="tournamentNumber" label="Number of Participants"/>
+    <input type="checkbox" id="tournamentChance" label="Chance?"/>
+    <button id="createTournament" onclick="createTournament()">Create Tournament</button>
+    <button id="runARound" onclick="runARound()">Run a round</button>
+
+    <div id="content"></div>
+</body>
