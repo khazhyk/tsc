@@ -13,6 +13,7 @@ function SwissStyleRecordGenerator(numTeams, record, options) {
         var team = new Team("Random Team #" + i);
         team.current_elo = team.starting_elo = boxMuller()[0] * elo_std_dev + elo_mean;
         team.current_swiss_score = 0;
+        team.has_sat_out = false;
 
         this.record.registerTeam(team);
 
@@ -25,7 +26,8 @@ SwissStyleRecordGenerator.prototype.toDataArray = function() {
             name: team.name,
             score: team.current_swiss_score,
             seed: team.starting_elo,
-            elo: team.current_elo
+            elo: team.current_elo,
+            "sat out?": team.has_sat_out
         }
     })
 }
@@ -73,12 +75,13 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
                 for (var k = pointGrouping.length - 1; k >=0; k--) {
                     if (!pointGrouping[k].has_sat_out) {
                         pointGrouping.push(pointGrouping.splice(k,1)[0]);
-                        this.record.teamByName(pointGrouping[pointGrouping.length - 1].name).has_sat_out = true;
                         break;
                     }
                 }
             }
         }
+
+        this.record.teamByName(pointGrouping[pointGrouping.length - 1].name).has_sat_out = true;
 
         for (var j = 0; j < midpoint; j++) {
             var team1 = pointGrouping[j], team2 = pointGrouping[j + midpoint];
