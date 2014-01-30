@@ -3,7 +3,6 @@ function SwissStyleRecordGenerator(numTeams, record, options) {
     this.record = record || new SimRecord();
     this.rounds = 0;
     this.chance = (options.chance === undefined) ? true : options.chance;
-    this.give_free_point = (options.give_free_point === undefined) ? false : options.give_free_point;
 
     var elo_mean = 1200;
     var elo_std_dev = 100;
@@ -84,10 +83,6 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
 
         var sat_out_team = this.record.teamByName(pointGrouping[pointGrouping.length - 1].name);
         sat_out_team.has_sat_out = true;
-
-        if (this.give_free_point) {
-            sat_out_team.current_swiss_score += 1;
-        }
 
 
         for (var j = 0; j < midpoint; j++) {

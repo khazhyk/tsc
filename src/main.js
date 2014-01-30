@@ -6,9 +6,8 @@ function createTournament() {
     var number = parseInt(document.getElementById("tournamentNumber").value) || 64;
 
     var chance = document.getElementById("tournamentChance").checked;
-    var freepoint = document.getElementById("tournamentFreePoint").checked;
 
-    currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance, give_free_point:freepoint});
+    currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance});
     currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"));
 
     currentTable.sortBy("score", -1);
