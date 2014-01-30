@@ -18,3 +18,11 @@ function runARound() {
         currentTable.updateData(currentTournament.toDataArray());
     }
 }
+
+function runTourney() {
+    if (currentTournament) {
+        while(!currentTournament.is_done) currentTournament.runARound();
+        currentTable.sortBy("score", -1);
+        currentTable.updateData(currentTournament.toDataArray());
+    }
+}

@@ -35,6 +35,8 @@ SwissStyleRecordGenerator.prototype.runARound = function() {
     if (this.rounds <= parseInt((Math.log(this.record.teams.length)/Math.log(2)))) {
         var matches = this.getMatchPairings();
         this.runMatches(matches);
+    } else {
+        this.is_done = true;
     }
 }
 
