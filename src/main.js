@@ -4,6 +4,7 @@ var currentTable;
 function createTournament() {
     var rounds = document.getElementById("rounds");
     var number = parseInt(document.getElementById("tournamentNumber").value) || 64;
+
     var chance = document.getElementById("tournamentChance").checked;
 
     currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance});
