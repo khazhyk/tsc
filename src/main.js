@@ -13,7 +13,7 @@ function createTournament() {
 }
 
 function runARound() {
-    if (currentTournament) {
+    if (currentTournament && !currentTournament.is_done) {
         currentTournament.runARound();
         currentTable.updateData(currentTournament.toDataArray());
     }

@@ -45,7 +45,7 @@ ShittyTable.prototype.doSort = function() {
             if (a[crit] == b[crit]) {
                 continue;
             } else {
-                return ((a[crit] > b[crit]) ? -1 : 1) * (desc);
+                return ((a[crit] > b[crit]) ? -1 : 1) * -(desc);
             }
         }
     });
