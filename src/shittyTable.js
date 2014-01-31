@@ -60,12 +60,21 @@ ShittyTable.prototype.render = function() {
         that.render();
     }
 
-    var table = objectArray2Table(objectArray, numbered, onClickFun);
+    var table = this.objectArray2Table(objectArray, numbered, onClickFun);
 
     this.owningElement.appendChild(table);
 }
-
-function objectArray2Table(objectArray, numbered, clickFun) {
+ShittyTable.prototype.getHeaderFlair = function(name) {
+    if (this.sortCrit[0][0] == name) {
+        return this.sortCrit[0][1] == 1 ? "\u25b2" : "\u25bc";
+    } else {
+        var left = this.sortCrit.filter(function(x){return x[0] === name;});
+        if (left.length > 0) {
+            return left[0][1] == 1 ? "\u25b4" : "\u25be";
+        }
+    }
+}
+ShittyTable.prototype.objectArray2Table = function(objectArray, numbered, clickFun) {
     var tbl = document.createElement("table"),
         thd = document.createElement("thead"),
         tbd = document.createElement("tbody"),
@@ -79,7 +88,7 @@ function objectArray2Table(objectArray, numbered, clickFun) {
 
     for (attribute in objectArray[0]) {
         var cell = document.createElement("th");
-        cell.appendChild(document.createTextNode(attribute));
+        cell.appendChild(document.createTextNode(attribute + " " + this.getHeaderFlair(attribute)));
         cell.addEventListener("click", (function(at) {
             return function() {
                 clickFun(at);
