@@ -73,6 +73,7 @@ ShittyTable.prototype.getHeaderFlair = function(name) {
             return left[0][1] == 1 ? "\u25b4" : "\u25be";
         }
     }
+    return "";
 }
 ShittyTable.prototype.objectArray2Table = function(objectArray, numbered, clickFun) {
     var tbl = document.createElement("table"),

@@ -12,7 +12,7 @@ function createTournament() {
     currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance, std_dev: std_dev});
     currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"));
 
-    currentTable.sortBy("elo", -1);
+    currentTable.sortBy("seed", -1);
     currentTable.sortBy("score", -1);
     currentTable.render();
     rounds.innerHTML = currentTournament.rounds;
