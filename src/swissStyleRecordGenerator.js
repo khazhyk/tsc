@@ -88,10 +88,12 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
         for (var j = 0; j < midpoint; j++) {
             var team1 = pointGrouping[j], team2 = pointGrouping[j + midpoint];
             if (this.record.matchByParticipantNames([team1.name, team2.name]).length != 0) {
+                console.log("Teams " + team1.name + " and " + team2.name + " have played before! Swapping with someone new!");
                 temp = pointGrouping[j+1];
                 pointGrouping[j+1] = pointGrouping[j];
                 pointGrouping[j] = temp;
                 if (j+1 == midpoint) {
+                    console.log("Failed to do pairing, restarting...");
                     pairings = [];
                     j = 0;
                     continue;
