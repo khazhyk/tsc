@@ -79,10 +79,9 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
                     }
                 }
             }
+            var sat_out_team = this.record.teamByName(pointGrouping[pointGrouping.length - 1].name);
+            sat_out_team.has_sat_out = true;
         }
-
-        var sat_out_team = this.record.teamByName(pointGrouping[pointGrouping.length - 1].name);
-        sat_out_team.has_sat_out = true;
 
 
         for (var j = 0; j < midpoint; j++) {
