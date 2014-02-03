@@ -81,7 +81,7 @@ SwissStyleRecordGenerator.prototype.chooseWhoSitsOutAndPutThemLast = function(li
     if (list_of_same_point_teams.length % 2 != 0) {
         // Check if the last one in the list has already sat out. If they have, don't let them sit out again
         if (this.record.teamByName(list_of_same_point_teams[numTeams - 1].name).has_sat_out) {
-            for (var k = numTeams; k >=0; k--) {
+            for (var k = numTeams - 1; k >=0; k--) {
                 // Find the first team that _hasn't_ sat out starting from the end of the list
                 if (!this.record.teamByName(list_of_same_point_teams[k].name).has_sat_out) {
                     // found it, put it at the end, return
