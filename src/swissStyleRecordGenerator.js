@@ -93,6 +93,8 @@ SwissStyleRecordGenerator.prototype.chooseWhoSitsOutAndPutThemLast = function(li
         // notify record that they sat out
         this.record.teamByName(list_of_same_point_teams[numTeams - 1].name).has_sat_out = true;
     }
+
+    return list_of_same_point_teams;
 }
 SwissStyleRecordGenerator.prototype.getUniquePairings = function(list_of_same_point_teams) {
     var midpoint = parseInt(list_of_same_point_teams.length / 2);
