@@ -68,44 +68,58 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
             return (a.starting_elo < b.starting_elo) ? 1 : -1;
         });
 
-        var midpoint = parseInt(pointGrouping.length/2);
+        pointGrouping = this.chooseWhoSitsOutAndPutThemLast(pointGrouping);
 
-        // Assumes sorted list
-        if (pointGrouping.length % 2 != 0) {
-            if (this.record.teamByName(pointGrouping[pointGrouping.length - 1].name).has_sat_out) {
-                for (var k = pointGrouping.length - 1; k >=0; k--) {
-                    if (!this.record.teamByName(pointGrouping[k].name).has_sat_out) {
-                        pointGrouping.push(pointGrouping.splice(k,1)[0]);
-                        break;
-                    }
-                }
-            }
-            var sat_out_team = this.record.teamByName(pointGrouping[pointGrouping.length - 1].name);
-            sat_out_team.has_sat_out = true;
-        }
-
-
-        for (var j = 0; j < midpoint; j++) {
-            var team1 = pointGrouping[j], team2 = pointGrouping[j + midpoint];
-            console.log("Trying to pair " + team1.name + " and " + team2.name);
-            if (this.record.matchByParticipantNames([team1.name, team2.name]).length != 0) {
-                console.log("Teams " + team1.name + " and " + team2.name + " have played before! Swapping with someone new!");
-                temp = pointGrouping[j+1];
-                pointGrouping[j+1] = pointGrouping[j];
-                pointGrouping[j] = temp;
-                if (j+1 == midpoint) {
-                    console.log("Failed to do pairing, restarting...");
-                    pairings = [];
-                    j = 0;
-                    continue;
-                }
-            }
-            pairings.push([pointGrouping[j], pointGrouping[j+midpoint]]);
-        }
+        [].push.apply(pairings, this.getUniquePairings(pointGrouping));
     }
 
     return pairings;
 }
+SwissStyleRecordGenerator.prototype.chooseWhoSitsOutAndPutThemLast = function(list_of_same_point_teams) {
+    // Assumes sorted list
+    var numTeams = list_of_same_point_teams.length;
+    if (list_of_same_point_teams.length % 2 != 0) {
+        // Check if the last one in the list has already sat out. If they have, don't let them sit out again
+        if (this.record.teamByName(list_of_same_point_teams[numTeams - 1].name).has_sat_out) {
+            for (var k = numTeams; k >=0; k--) {
+                // Find the first team that _hasn't_ sat out starting from the end of the list
+                if (!this.record.teamByName(list_of_same_point_teams[k].name).has_sat_out) {
+                    // found it, put it at the end, return
+                    list_of_same_point_teams.push(list_of_same_point_teams.splice(k,1)[0]);
+                    break;
+                }
+            }
+        }
+        // notify record that they sat out
+        this.record.teamByName(list_of_same_point_teams[numTeams - 1].name).has_sat_out = true;
+    }
+}
+SwissStyleRecordGenerator.prototype.getUniquePairings = function(list_of_same_point_teams) {
+    var midpoint = parseInt(list_of_same_point_teams.length / 2);
+
+    var pairings = [];
+
+    for (var j = 0; j < midpoint; j++) {
+        var team1 = list_of_same_point_teams[j],
+            team2 = list_of_same_point_teams[j + midpoint];
+
+        console.log("Trying to pair " + team1.name + " and " + team2.name);
+
+        if (this.record.matchByParticipantNames([team1.name, team2.name]).length != 0) {
+            console.log("Teams have played before!! Swapping and starting again...");
+            temp = list_of_same_point_teams[j+1];
+            list_of_same_point_teams[j+1] = list_of_same_point_teams[j];
+            list_of_same_point_teams[j] = temp;
+            // Restart with new order
+            return this.getUniquePairings(list_of_same_point_teams);
+        }
+
+        pairings.push([team1, team2]);
+    }
+
+    return pairings;
+}
+
 
 SwissStyleRecordGenerator.prototype.runMatches = function(pairings) {
     for (var key in pairings) { 
