@@ -72,9 +72,9 @@ SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
 
         // Assumes sorted list
         if (pointGrouping.length % 2 != 0) {
-            if (pointGrouping[pointGrouping.length - 1].has_sat_out) {
+            if (this.record.teamByName(pointGrouping[pointGrouping.length - 1].name).has_sat_out) {
                 for (var k = pointGrouping.length - 1; k >=0; k--) {
-                    if (!pointGrouping[k].has_sat_out) {
+                    if (!this.record.teamByName(pointGrouping[k].name).has_sat_out) {
                         pointGrouping.push(pointGrouping.splice(k,1)[0]);
                         break;
                     }
