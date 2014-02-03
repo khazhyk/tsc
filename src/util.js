@@ -22,7 +22,7 @@ function calculateElo(winner, loser, tie) {
         var winner_newelo = winner_elo + k_factor*(winnings_winner - expected_winner);
         var loser_newelo = loser_elo + k_factor*(winnings_loser - expected_loser);
 
-        console.log(winner.name + " (" + winner_elo + ", " + parseInt(expected_winner*100) + "%) vs " + loser.name + " (" +loser_elo + ", " + parseInt(expected_loser*100)+ "%), new elos: " + winner_newelo + ", " + loser_newelo);
+        //console.log(winner.name + " (" + winner_elo + ", " + parseInt(expected_winner*100) + "%) vs " + loser.name + " (" +loser_elo + ", " + parseInt(expected_loser*100)+ "%), new elos: " + winner_newelo + ", " + loser_newelo);
 
         return [winner_newelo, loser_newelo];
 
