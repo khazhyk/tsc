@@ -1,5 +1,5 @@
 function ShittyTable(objectArray, element, options) {
-    this.isNumbered = false;
+    this.isNumbered = (options.isNumbered === undefined) ? false : options.isNumbered;
     this.data = objectArray;
     this.owningElement = element;
     this.defaultSortOrder = -1;

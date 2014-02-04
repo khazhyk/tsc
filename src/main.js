@@ -10,7 +10,7 @@ function createTournament() {
     var chance = document.getElementById("tournamentChance").checked;
 
     currentTournament = new SwissStyleRecordGenerator(number,null, {chance:chance, std_dev: std_dev});
-    currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"));
+    currentTable = new ShittyTable(currentTournament.toDataArray(), document.getElementById("content"),{isNumbered:true});
 
     currentTable.sortBy("seed", -1);
     currentTable.sortBy("score", -1);
