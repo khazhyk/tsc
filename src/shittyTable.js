@@ -109,7 +109,8 @@ ShittyTable.prototype.objectArray2Table = function(objectArray, numbered, clickF
         }
         for (attribute in objectArray[idx]) {
             var cell = document.createElement("td");
-            cell.appendChild(document.createTextNode(objectArray[idx][attribute]));
+            cell.innerHTML = objectArray[idx][attribute];
+            //cell.appendChild(document.createTextNode(objectArray[idx][attribute]));
             row.appendChild(cell);
         }
         tbd.appendChild(row);

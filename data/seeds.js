@@ -109,7 +109,8 @@ var seeds_import = [
     },
     {
         "name": "RedPanthers",
-        "seed": 28
+        "seed": 28,
+        "dq":true
     },
     {
         "name": "Storm",
@@ -161,7 +162,8 @@ var seeds_import = [
     },
     {
         "name": "DynamicPulse",
-        "seed": 41
+        "seed": 41,
+        "dq":true
     },
     {
         "name": "TheJackHammers",
@@ -239,7 +241,8 @@ var seeds_import = [
     },
     {
         "name": "Ghost Rushers",
-        "seed": 60
+        "seed": 60,
+        "dq":true
     },
     {
         "name": "Team CacaFuego",

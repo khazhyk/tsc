@@ -69,6 +69,8 @@ SwissStyleRecordGenerator.prototype.importMatches = function(json_data) {
 
         var match = new Match(winner, loser, tie, new Date(match_entry.start), new Date(match_entry.end), match_entry.map);
 
+        match.url = "<a href=\"https://oc.tc/matches/"+match_entry.id.str+"\">Link</a>";
+
         winner.current_elo = match.ending_elo[0]
         loser.current_elo = match.ending_elo[1];
 
@@ -101,7 +103,8 @@ SwissStyleRecordGenerator.prototype.matchToDataArray = function() {
             "tie?": match.tie,
             map: match.map,
             start: match.start_time,
-            end: match.end_time
+            end: match.end_time,
+            link: match.url
         }
     })
 }
