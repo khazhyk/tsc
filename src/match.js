@@ -1,9 +1,13 @@
-function Match(winner, loser, tie) {
+function Match(winner, loser, tie, start_time, end_time, map) {
     this.teams = [];    // Array of String
     this.round;         // Number
     this.start_time;    // Date
     this.winner;        // String
     this.default;       // Boolean
+    this.tie = !!tie;
+    this.start_time = start_time;
+    this.end_time = end_time;
+    this.map = map;
     this.starting_elo = [];
     this.ending_elo = [];
     if (winner && loser) {

@@ -1,4 +1,5 @@
 function ShittyTable(objectArray, element, options) {
+    var options = options || {};
     this.isNumbered = (options.isNumbered === undefined) ? false : options.isNumbered;
     this.data = objectArray;
     this.owningElement = element;

@@ -1,7 +1,8 @@
 /** Plays the binary logarithm of the matches for the Swiss Style Tournament */
-function SwissStyleRecordGenerator(numTeams, record, options) {
-    this.record = record || new SimRecord();
+function SwissStyleRecordGenerator(numTeams, options) {
+    this.record = new SimRecord();
     this.rounds = 0;
+    var options = options || {};
     this.chance = (options.chance === undefined) ? true : options.chance;
 
     var elo_mean = 1200;
@@ -9,15 +10,74 @@ function SwissStyleRecordGenerator(numTeams, record, options) {
 
 
     // Generate teams
-    for (var i = 0; i < numTeams; i++) {
-        var team = new Team("Random Team #" + i);
-        team.current_elo = team.starting_elo = boxMuller()[0] * elo_std_dev + elo_mean;
+    if (numTeams) {
+        for (var i = 0; i < numTeams; i++) {
+            var team = new Team("Random Team #" + i);
+            team.current_elo = team.starting_elo = boxMuller()[0] * elo_std_dev + elo_mean;
+            team.current_swiss_score = 0;
+            team.has_sat_out = false;
+
+            this.record.registerTeam(team);
+        }
+    }
+}
+SwissStyleRecordGenerator.prototype.importTeams = function(json_data) {
+    var that = this;
+    json_data.forEach(function(team_entry) {
+        var team = new Team(team_entry.name);
+        team.starting_elo = 1800 - 10 * team_entry.seed;
+        team.current_elo = team.starting_elo;
         team.current_swiss_score = 0;
         team.has_sat_out = false;
+        team.is_dq = !!team_entry.dq;
 
-        this.record.registerTeam(team);
+        that.record.registerTeam(team);
+    });
+}
+SwissStyleRecordGenerator.prototype.importMatches = function(json_data) {
+    var that = this;
+    json_data.forEach(function(match_entry) {
+        match_entry.teams.forEach(function(team) {
+            if (!that.record.teamByName(team))
+                throw new Error("Team \"" + team + "\" not in record");
+        });
+    });
 
-    }
+    var sorted_matches = json_data.sort(function(a,b) {
+        return a.start > b.start ? 1 : -1;
+    });
+
+    sorted_matches.forEach(function(match_entry) {
+        var team1 = that.record.teamByName(match_entry.teams[0]),
+            team2 = that.record.teamByName(match_entry.teams[1]);
+
+        if (that.record.matchByParticipantNames([team1.name, team2.name]).length != 0) {
+            console.log("Warning: Teams " + team1.name + " and " + team2.name + " have already played a match! Tiebreaker?");
+        }
+
+        var winner, loser;
+
+        if (team1.name == match_entry.winner) {
+            winner = team1;
+            loser = team2;
+        } else {
+            winner = team2;
+            loser = team1;
+        }
+
+        var tie = !match_entry.winner;
+
+        var match = new Match(winner, loser, tie, new Date(match_entry.start), new Date(match_entry.end), match_entry.map);
+
+        winner.current_elo = match.ending_elo[0]
+        loser.current_elo = match.ending_elo[1];
+
+        if (!tie) {
+            winner.current_swiss_score += 1;
+        }
+
+        that.record.registerMatch(match);
+    });
 }
 
 SwissStyleRecordGenerator.prototype.toDataArray = function() {
@@ -29,6 +89,19 @@ SwissStyleRecordGenerator.prototype.toDataArray = function() {
             elo: team.current_elo,
             "sat out?": team.has_sat_out,
             played:team.matches.length
+        }
+    })
+}
+
+SwissStyleRecordGenerator.prototype.matchToDataArray = function() {
+    return this.record.matches.map(function(match) {
+        return {
+            winner: match.teams[0],
+            loser: match.teams[1],
+            "tie?": match.tie,
+            map: match.map,
+            start: match.start_time,
+            end: match.end_time
         }
     })
 }
@@ -46,7 +119,9 @@ SwissStyleRecordGenerator.prototype.runARound = function() {
 SwissStyleRecordGenerator.prototype.getMatchPairings = function() {
     var highScore = this.record.teams.map(function(x){return x.current_swiss_score;}).reduce(function(a,b){return Math.max(a,b);});
 
-    var teamsObjArray = this.record.teams.map(function(team) {
+    var teamsObjArray = this.record.teams.filter(function(team){
+        return !team.is_dq;
+    }).map(function(team) {
         return {name: team.name, current_swiss_score: team.current_swiss_score, starting_elo: team.starting_elo, has_sat_out: team.has_sat_out};
     });
 
