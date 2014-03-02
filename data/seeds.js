@@ -192,7 +192,8 @@ var seeds_import = [
     },
     {
         "name": "NextGeneration",
-        "seed": 48
+        "seed": 48,
+        "dq": true
     },
     {
         "name": "Building Blox",
@@ -200,7 +201,8 @@ var seeds_import = [
     },
     {
         "name": "CraftYourDeath",
-        "seed": 50
+        "seed": 50,
+        "dq": true
     },
     {
         "name": "Dynasty",
@@ -229,7 +231,8 @@ var seeds_import = [
     },
     {
         "name": "FreeStyle",
-        "seed": 57
+        "seed": 57,
+        "dq": true
     },
     {
         "name": "FireFoxes",
@@ -262,7 +265,8 @@ var seeds_import = [
     },
     {
         "name": "Ninja Squad",
-        "seed": 65
+        "seed": 65,
+        "has_sat_out":true
     },
     {
         "name": "PentaKillers",
@@ -297,7 +301,8 @@ var seeds_import = [
     },
     {
         "name": "FlamingFrost",
-        "seed": 73
+        "seed": 73,
+        "has_sat_out":true
     },
     {
         "name": "AirCrash",
@@ -305,7 +310,8 @@ var seeds_import = [
     },
     {
         "name": "Leviathan",
-        "seed": 75
+        "seed": 75,
+        "dq": true
     },
     {
         "name": "EleKtro",

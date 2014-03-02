@@ -28,7 +28,7 @@ SwissStyleRecordGenerator.prototype.importTeams = function(json_data) {
         team.starting_elo = 1800 - 10 * team_entry.seed;
         team.current_elo = team.starting_elo;
         team.current_swiss_score = 0;
-        team.has_sat_out = false;
+        team.has_sat_out = !!team_entry.has_sat_out;
         team.is_dq = !!team_entry.dq;
 
         that.record.registerTeam(team);
