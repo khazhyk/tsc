@@ -1427,18 +1427,6 @@ var matches_import = [
         "winner": "Mindcool"
     },
     {
-        "end": "2014-03-01T22:50:58.070Z",
-        "id": {
-            "str": "5312387dc8f2548ce2c751e2"
-        },
-        "map": "Blocks DTC",
-        "start": "2014-03-01T22:50:56.117Z",
-        "teams": [
-            "Team Brainfart",
-            "Concatenation"
-        ]
-    },
-    {
         "end": "2014-02-15T23:42:34.092Z",
         "id": {
             "str": "52ffe89fc8f2da907bb3440d"
