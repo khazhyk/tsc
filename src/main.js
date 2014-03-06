@@ -50,7 +50,8 @@ function importData() {
         tm = new SwissStyleRecordGenerator();
         tm.importTeams(seeds_import);
         tm.importMatches(matches_import);
-    },500);
+	showMatches();
+    },100);
 }
 
 function showTeams() {
