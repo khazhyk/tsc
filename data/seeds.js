@@ -65,7 +65,8 @@ var seeds_import = [
     },
     {
         "name": "Punishers",
-        "seed": 17
+        "seed": 17,
+        "has_sat_out": true
     },
     {
         "name": "Bacon Warriors",
@@ -126,7 +127,8 @@ var seeds_import = [
     },
     {
         "name": "Minexus ^^",
-        "seed": 32
+        "seed": 32,
+        "dq": true
     },
     {
         "name": "VortexRush",
@@ -158,7 +160,8 @@ var seeds_import = [
     },
     {
         "name": "Pony Swag",
-        "seed": 40
+        "seed": 40,
+        "dq": true
     },
     {
         "name": "DynamicPulse",
@@ -210,7 +213,8 @@ var seeds_import = [
     },
     {
         "name": "Boltato",
-        "seed": 52
+        "seed": 52,
+        "dq": true
     },
     {
         "name": "Virus",
@@ -236,7 +240,8 @@ var seeds_import = [
     },
     {
         "name": "FireFoxes",
-        "seed": 58
+        "seed": 58,
+        "dq": true
     },
     {
         "name": "Eclipse",
@@ -292,7 +297,8 @@ var seeds_import = [
     },
     {
         "name": "Assassin's Soul",
-        "seed": 71
+        "seed": 71,
+        "has_sat_out": true
     },
     {
         "name": "Dark Souls",
@@ -315,7 +321,8 @@ var seeds_import = [
     },
     {
         "name": "EleKtro",
-        "seed": 76
+        "seed": 76,
+        "dq": true
     },
     {
         "name": "Concatenation",
