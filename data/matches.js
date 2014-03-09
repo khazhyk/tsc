@@ -79,7 +79,7 @@ var matches_import = [
     {
         "end": "2014-02-22T00:00:00Z",
         "id": {
-            "str":"na"
+            "str":"fake match"
         },
         "map": "Fortress Battles",
         "start": "2014-02-22T00:00:00Z",
@@ -2032,5 +2032,18 @@ var matches_import = [
             "Fracture"
         ],
         "winner": "Fracture"
+    },
+    {
+        "end": "2014-03-09T00:00:00Z",
+        "id": {
+            "str": "fake match",
+        },
+        "map": "Iris DTC",
+        "start": "2014-03-09T00:00:00Z",
+        "teams": [
+            "Stained Glass",
+            "Block Glitch"
+        ],
+        "winner": "Stained Glass"
     }
 ];
