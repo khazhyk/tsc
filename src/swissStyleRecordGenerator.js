@@ -88,7 +88,7 @@ SwissStyleRecordGenerator.prototype.toDataArray = function() {
             name: team.name,
             score: team.current_swiss_score,
             seed: team.starting_elo,
-            //elo: team.current_elo,
+            elo: team.current_elo,
             "sat out?": team.has_sat_out,
             played:team.matches.length
         }

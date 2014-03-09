@@ -51,7 +51,7 @@ function importData() {
         tm.importTeams(seeds_import);
         tm.importMatches(matches_import);
 	showMatches();
-    },100);
+    },300);
 }
 
 function showTeams() {
