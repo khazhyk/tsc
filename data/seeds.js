@@ -177,7 +177,8 @@ var seeds_import = [
     },
     {
         "name": "Entity",
-        "seed": 44
+        "seed": 44,
+        "dq": true
     },
     {
         "name": "Skrull PvP",
