@@ -160,8 +160,7 @@ var seeds_import = [
     },
     {
         "name": "Pony Swag",
-        "seed": 40,
-        "dq": true
+        "seed": 40
     },
     {
         "name": "DynamicPulse",
