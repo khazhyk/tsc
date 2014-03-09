@@ -77,6 +77,19 @@ var matches_import = [
         "winner": "Ambush"
     },
     {
+        "end": "2014-02-22T00:00:00Z",
+        "id": {
+            "str":"na"
+        },
+        "map": "Fortress Battles",
+        "start": "2014-02-22T00:00:00Z",
+        "teams": [
+            "Proximity",
+            "YoloStory"
+        ],
+        "winner":"Proximity"
+    },
+    {
         "end": "2014-02-22T21:52:48.182Z",
         "id": {
             "str": "5308d7fac8f23d7a2d1da638"
