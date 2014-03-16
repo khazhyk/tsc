@@ -59,6 +59,7 @@ function showTeams() {
         tbl = new ShittyTable(tm.toDataArray(), document.getElementById("content"), {isNumbered:true});
 
         tbl.sortBy("seed", -1);
+        tbl.sortBy("tb_score", -1);
         tbl.sortBy("score", -1);
         tbl.render();
     }
