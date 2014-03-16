@@ -87,7 +87,9 @@ SwissStyleRecordGenerator.prototype.getTieBreakerScoreForTeam = function(team) {
     if (team.matches.length == 0) return 0;
 
     return team.matches.map(function(m) {
+        console.log(m);
         if (m.winner != team.name) return 0;
+        if (m.tie) return 0;
 
         var otherTeam = that.record.teamByName(m.teams[1]);
         console.log(team, otherTeam);
