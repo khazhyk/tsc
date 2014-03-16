@@ -42,14 +42,14 @@ Team.prototype.getScore = function() {
 
     return 2 * wins + ties;
 }
-Team.prototype.getWScore = function() {
+Team.prototype.getTieBreakerScore = function() {
     if (this.matches.length == 0) return 0;
     var that = this;
 
     return this.matches.map(function(m) {
         var initscore = 0;
-        if (m.winner == that.name) initscore = 2;
-        if (m.winner == "TIE" && m.default == false) initscore = 1;
+        if (m.winner == that.name) initscore = 1;
+        if (m.winner == "TIE" && m.default == false) initscore = 0;
 
         var otherTeam = Record.get().teamByName(m.teams.filter(function(x) {return x.name != that.name})[0]);
 

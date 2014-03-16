@@ -82,11 +82,26 @@ SwissStyleRecordGenerator.prototype.importMatches = function(json_data) {
     });
 }
 
+SwissStyleRecordGenerator.prototype.getTieBreakerScoreForTeam = function(team) {
+    var that = this;
+    if (team.matches.length == 0) return 0;
+
+    return team.matches.map(function(m) {
+        if (m.winner != team.name) return 0;
+
+        var otherTeam = that.record.teamByName(m.teams[1]);
+        console.log(team, otherTeam);
+        return otherTeam.current_swiss_score;
+    }).reduce(function(a,b){return a + b;});
+}
+
 SwissStyleRecordGenerator.prototype.toDataArray = function() {
+    var that = this;
     return this.record.teams.map(function(team) {
         return {
             name: team.name,
             score: team.current_swiss_score,
+            tb_score: that.getTieBreakerScoreForTeam(team),
             seed: team.starting_elo,
             //elo: team.current_elo,
             "sat out?": team.has_sat_out,
