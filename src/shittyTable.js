@@ -11,7 +11,13 @@ ShittyTable.prototype.updateData = function(data) {
     this.doSort();
     this.render();
 }
-ShittyTable.prototype.sortBy = function(crit, reverse, ignorePrev) {
+/**
+ * desc, asc, reset
+ * @param  {[type]} crit    [description]
+ * @param  {[type]} reverse [description]
+ * @return {[type]}         [description]
+ */
+ShittyTable.prototype.sortBy = function(crit, reverse) {
     var match = this.sortCrit.filter(function(x) {
         return x[0] == crit;
     });
@@ -20,7 +26,11 @@ ShittyTable.prototype.sortBy = function(crit, reverse, ignorePrev) {
 
     if (match.length !== 0) {
         if (newCrit[1] === 0) {
-            newCrit[1] = (match[0][1] == -1) ? 1 : -1;
+            if (match[0][1] == -1) {
+                newCrit[1] = 1;
+            } else {
+                newCrit[1] = 0;
+            }
         }
     } else {
         if (newCrit[1] == 0) {
@@ -32,7 +42,9 @@ ShittyTable.prototype.sortBy = function(crit, reverse, ignorePrev) {
         return x[0] != crit;
     })
 
-    this.sortCrit.unshift(newCrit);
+    if (newCrit[1]) {
+        this.sortCrit.unshift(newCrit);
+    }
 
     this.doSort();
 
@@ -66,12 +78,14 @@ ShittyTable.prototype.render = function() {
     this.owningElement.appendChild(table);
 }
 ShittyTable.prototype.getHeaderFlair = function(name) {
-    if (this.sortCrit[0][0] == name) {
-        return this.sortCrit[0][1] == 1 ? "\u25b2" : "\u25bc";
-    } else {
-        var left = this.sortCrit.filter(function(x){return x[0] === name;});
-        if (left.length > 0) {
-            return left[0][1] == 1 ? "\u25b4" : "\u25be";
+    if (this.sortCrit.length > 0) {
+        if (this.sortCrit[0][0] == name) {
+            return this.sortCrit[0][1] == 1 ? "\u25b2" : "\u25bc";
+        } else {
+            var left = this.sortCrit.filter(function(x){return x[0] === name;});
+            if (left.length > 0) {
+                return left[0][1] == 1 ? "\u25b4" : "\u25be";
+            }
         }
     }
     return "";
