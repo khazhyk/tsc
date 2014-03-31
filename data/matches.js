@@ -2561,8 +2561,7 @@ var matches_import = [
         "teams": [
             "Tactical Info",
             "Vindicate"
-        ],
-        "winner": "Tactical Info"
+        ]
     },
     {
         "end": "2014-03-29T18:24:51.486Z",
